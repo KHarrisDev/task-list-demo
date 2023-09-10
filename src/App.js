@@ -2,6 +2,9 @@
 // 2. Render static elements from a static array of data into the UI
 // * When rendering a list of items, create a parent component that contains <ul> element. Then create a component that contains the <li> elements. This will similate the map function rendering data into the UI.
 // * Conditionally add style to the element creating the UI by add a css object to the JavaScript mode
+// 3. Use the form element to submit data.
+//  * Use preventDefault() to prevent a refresh when pressing enter
+//  * onSubmit() will pass the event object to the handler function that contains the value typed by user
 
 const initialData = [
   { 
@@ -42,9 +45,11 @@ const Header = () => {
 
 const Form = () => {
   return (
-    <div className="add-form">
+    <form className="add-form">
       <h3>Please type a task to complete in the input box.</h3>
-    </div>
+      <input type="text" placeholder="Enter a task . . ."/>
+      <button>Add Task</button>
+    </form>
   );
 }
 
@@ -52,7 +57,7 @@ const TaskList = () => {
   return (
     <ul className="task-list">
       {initialData.map((item) => (
-        <Task item={item} />
+        <Task key={item.id} item={item} />
       ))}
     </ul>
   );
